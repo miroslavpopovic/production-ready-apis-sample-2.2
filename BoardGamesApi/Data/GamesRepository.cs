@@ -13,11 +13,17 @@ namespace BoardGamesApi.Data
     {
         private IList<Game> _games;
 
-        public IEnumerable<Game> GetAll()
+        public PagedList<Game> GetPage(int page = 1, int pageSize = 10)
         {
             var games = GetGames();
 
-            return games;
+            return new PagedList<Game>
+            {
+                Items = games.Skip((page - 1) * pageSize).Take(pageSize),
+                Page = page,
+                PageSize = pageSize,
+                TotalCount = games.Count
+            };
         }
 
         public Game GetById(string id)

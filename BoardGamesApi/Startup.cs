@@ -34,6 +34,9 @@ namespace BoardGamesApi
                 app.UseHsts();
             }
 
+            // Inject our custom error handling middleware into ASP.NET Core pipeline
+            app.UseMiddleware<ErrorHandlingMiddleware>();
+
             app.UseHttpsRedirection();
             app.UseMvc();
         }

@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using BoardGamesApi.Models;
+﻿using BoardGamesApi.Models;
 
 namespace BoardGamesApi.Data
 {
     public interface IGamesRepository
     {
-        IEnumerable<Game> GetAll();
+        PagedList<Game> GetPage(int page = 1, int pageSize = 10);
         Game GetById(string id);
         void Create(Game game);
         void Delete(string id);
