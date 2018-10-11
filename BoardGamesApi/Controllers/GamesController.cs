@@ -1,11 +1,13 @@
 ﻿using BoardGamesApi.Data;
 using BoardGamesApi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace BoardGamesApi.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/games")]
     public class GamesController : Controller
     {
@@ -18,6 +20,7 @@ namespace BoardGamesApi.Controllers
             _logger = logger;
         }
 
+        [Authorize(Roles = "admin")]
         [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {
@@ -61,6 +64,7 @@ namespace BoardGamesApi.Controllers
             return game;
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult<Game> Post(GameInput model)
         {
@@ -74,6 +78,7 @@ namespace BoardGamesApi.Controllers
             return CreatedAtAction(nameof(GetById), "games", new {id = game.Id}, game);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPut("{id}")]
         public ActionResult<Game> Put(string id, GameInput model)
         {

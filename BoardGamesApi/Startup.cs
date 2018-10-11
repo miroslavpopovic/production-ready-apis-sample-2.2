@@ -1,4 +1,5 @@
 ﻿using BoardGamesApi.Data;
+using BoardGamesApi.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +21,8 @@ namespace BoardGamesApi
         {
             services.AddSingleton<IGamesRepository, GamesRepository>();
 
+            services.AddJwtBearerAuthentication(Configuration);
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -36,6 +39,8 @@ namespace BoardGamesApi
 
             // Inject our custom error handling middleware into ASP.NET Core pipeline
             app.UseMiddleware<ErrorHandlingMiddleware>();
+
+            app.UseAuthentication();
 
             app.UseHttpsRedirection();
             app.UseMvc();
