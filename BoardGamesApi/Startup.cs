@@ -45,6 +45,8 @@ namespace BoardGamesApi
 
             app.UseAuthentication();
 
+            app.UseMiddleware<LimitingMiddleware>();
+
             app.UseHttpsRedirection();
 
             app.UseSwagger();
