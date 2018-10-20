@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NJsonSchema;
+using NSwag.AspNetCore;
 
 namespace BoardGamesApi
 {
@@ -24,6 +26,8 @@ namespace BoardGamesApi
             services.AddJwtBearerAuthentication(Configuration);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddSwagger();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -43,6 +47,31 @@ namespace BoardGamesApi
             app.UseAuthentication();
 
             app.UseHttpsRedirection();
+
+            app.UseSwaggerUi3WithApiExplorer(
+                settings =>
+                {
+                    settings.GeneratorSettings.DefaultPropertyNameHandling = PropertyNameHandling.CamelCase;
+                    settings.PostProcess = document =>
+                    {
+                        document.Info.Version = "v1";
+                        document.Info.Title = "Board Games API v1";
+                        document.Info.Description = "A sample API for presentation purpose";
+                        document.Info.TermsOfService = "Do whatever you want with it :)";
+                        document.Info.Contact = new NSwag.SwaggerContact
+                        {
+                            Name = "Miroslav Popovic",
+                            Email = string.Empty,
+                            Url = "https://miroslavpopovic.com"
+                        };
+                        document.Info.License = new NSwag.SwaggerLicense
+                        {
+                            Name = "MIT",
+                            Url = "https://opensource.org/licenses/MIT"
+                        };
+                    };
+                });
+
             app.UseMvc();
         }
     }
