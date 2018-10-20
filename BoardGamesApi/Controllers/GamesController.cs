@@ -35,6 +35,8 @@ namespace BoardGamesApi.Controllers
         [Authorize(Roles = "admin")]
         [HttpDelete("{id}")]
         [ProducesResponseType(200)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(403)]
         [ProducesResponseType(404)]
         public IActionResult Delete(string id)
         {
@@ -60,6 +62,7 @@ namespace BoardGamesApi.Controllers
         /// <remarks>If you omit <c>page</c> and <c>size</c> query parameters, you'll get the first page with 10 games.</remarks>
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(PagedList<Game>))]
+        [ProducesResponseType(401)]
         public ActionResult<PagedList<Game>> GetAll(int page = 1, int size = 10)
         {
             _logger.LogDebug("Getting one page of games");
@@ -75,6 +78,7 @@ namespace BoardGamesApi.Controllers
         /// <param name="id">Id of the game to retrieve.</param>
         [HttpGet("{id}")]
         [ProducesResponseType(200, Type = typeof(Game))]
+        [ProducesResponseType(401)]
         [ProducesResponseType(404)]
         public ActionResult<Game> GetById(string id)
         {
@@ -99,6 +103,8 @@ namespace BoardGamesApi.Controllers
         [HttpPost]
         [ProducesResponseType(200, Type = typeof(Game))]
         [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(403)]
         public ActionResult<Game> Post(GameInput model)
         {
             _logger.LogDebug($"Creating a new game with title \"{model.Title}\"");
@@ -120,6 +126,8 @@ namespace BoardGamesApi.Controllers
         [HttpPut("{id}")]
         [ProducesResponseType(200, Type = typeof(Game))]
         [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(403)]
         [ProducesResponseType(404)]
         public ActionResult<Game> Put(string id, GameInput model)
         {
