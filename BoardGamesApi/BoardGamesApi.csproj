@@ -24,6 +24,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="3.0.0-beta1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="3.0.0-beta1" />
     <PackageReference Include="NSwag.AspNetCore" Version="11.20.1" />
   </ItemGroup>
 

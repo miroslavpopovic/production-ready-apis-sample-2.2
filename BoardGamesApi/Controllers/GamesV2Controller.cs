@@ -10,21 +10,20 @@ namespace BoardGamesApi.Controllers
     /// Games endpoint of Board Games API.
     /// </summary>
     [ApiController]
-    [ApiVersion("1", Deprecated = true)]
+    [ApiVersion("2")]
     [Authorize]
-    [Route("api/games")]
     [Route("api/v{api-version:apiVersion}/games")]
-    public class GamesController : Controller
+    public class GamesV2Controller : Controller
     {
         private readonly IGamesRepository _gamesRepository;
-        private readonly ILogger<GamesController> _logger;
+        private readonly ILogger<GamesV2Controller> _logger;
 
         /// <summary>
-        /// Creates a new instance of <see cref="GamesController"/> with dependencies injected.
+        /// Creates a new instance of <see cref="GamesV2Controller"/> with dependencies injected.
         /// </summary>
         /// <param name="gamesRepository">A repository for managing the games.</param>
         /// <param name="logger">Logger implementation.</param>
-        public GamesController(IGamesRepository gamesRepository, ILogger<GamesController> logger)
+        public GamesV2Controller(IGamesRepository gamesRepository, ILogger<GamesV2Controller> logger)
         {
             _gamesRepository = gamesRepository;
             _logger = logger;

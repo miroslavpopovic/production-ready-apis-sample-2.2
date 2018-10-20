@@ -24,7 +24,12 @@ namespace BoardGamesApi
 
             services.AddJwtBearerAuthentication(Configuration);
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc()
+                // HACK: Had to fall back to 2.1 compatibility to support API Versioning
+                // https://github.com/Microsoft/aspnet-api-versioning/issues/363
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddVersioning();
 
             services.AddSwagger();
         }
