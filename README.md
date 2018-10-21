@@ -8,6 +8,7 @@ For an older version of the sample that's using ASP.NET Core 2.1 and for older p
 
 To follow up the presentation, switch through the various numbered git branches.
 
-## Download (TODO)
+## Download
 
 - [Postman collection](board-games-api-postman-collection.json) for testing the API
+- [Sinergija 18 presentation](2018-sinergija-production-ready-apis-2.2.pptx)
