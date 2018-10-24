@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Api.Analyzers" Version="2.2.0-preview3-35497" />
     <PackageReference Include="NSwag.AspNetCore" Version="11.20.1" />
   </ItemGroup>
 
