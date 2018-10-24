@@ -3,6 +3,7 @@ using BoardGamesApi.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
 
 namespace BoardGamesApi.Controllers
 {
@@ -10,6 +11,7 @@ namespace BoardGamesApi.Controllers
     /// Games endpoint of Board Games API.
     /// </summary>
     [ApiController]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     [ApiVersion("1", Deprecated = true)]
     [Authorize]
     [Route("api/games")]
@@ -36,10 +38,6 @@ namespace BoardGamesApi.Controllers
         /// <param name="id">Id of the game to delete.</param>
         [Authorize(Roles = "admin")]
         [HttpDelete("{id}")]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(401)]
-        [ProducesResponseType(403)]
-        [ProducesResponseType(404)]
         public IActionResult Delete(string id)
         {
             _logger.LogDebug($"Deleting game with id {id}");
@@ -64,7 +62,6 @@ namespace BoardGamesApi.Controllers
         /// <remarks>If you omit <c>page</c> and <c>size</c> query parameters, you'll get the first page with 10 games.</remarks>
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(PagedList<Game>))]
-        [ProducesResponseType(401)]
         public ActionResult<PagedList<Game>> GetAll(int page = 1, int size = 10)
         {
             _logger.LogDebug("Getting one page of games");
@@ -79,9 +76,8 @@ namespace BoardGamesApi.Controllers
         /// </summary>
         /// <param name="id">Id of the game to retrieve.</param>
         [HttpGet("{id}")]
-        [ProducesResponseType(200, Type = typeof(Game))]
-        [ProducesResponseType(401)]
-        [ProducesResponseType(404)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Game))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Game> GetById(string id)
         {
             _logger.LogDebug($"Getting a game with id {id}");
@@ -103,10 +99,7 @@ namespace BoardGamesApi.Controllers
         /// <param name="model">Data to create the game from.</param>
         [Authorize(Roles = "admin")]
         [HttpPost]
-        [ProducesResponseType(200, Type = typeof(Game))]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(401)]
-        [ProducesResponseType(403)]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(Game))]
         public ActionResult<Game> Post(GameInput model)
         {
             _logger.LogDebug($"Creating a new game with title \"{model.Title}\"");
@@ -126,11 +119,8 @@ namespace BoardGamesApi.Controllers
         /// <param name="model">Data to update the game from.</param>
         [Authorize(Roles = "admin")]
         [HttpPut("{id}")]
-        [ProducesResponseType(200, Type = typeof(Game))]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(401)]
-        [ProducesResponseType(403)]
-        [ProducesResponseType(404)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Game))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Game> Put(string id, GameInput model)
         {
             _logger.LogDebug($"Updating a game with id {id}");
