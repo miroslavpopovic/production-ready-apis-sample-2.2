@@ -498,6 +498,30 @@
 					}
 				}
 			]
+		},
+		{
+			"name": "Monitoring",
+			"item": [
+				{
+					"name": "{{baseUrl}}live",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}live",
+							"host": [
+								"{{baseUrl}}live"
+							]
+						},
+						"description": "Health-check"
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
@@ -524,19 +548,19 @@
 	],
 	"variable": [
 		{
-			"id": "48e49a29-5e3a-46d6-a59a-44aafd8ad213",
+			"id": "b02921e6-3485-45fc-893b-821dcd1f02dd",
 			"key": "baseUrl",
 			"value": "https://localhost:44303/",
 			"type": "string"
 		},
 		{
-			"id": "61780360-789a-4c25-901e-a674517c253d",
+			"id": "4bc22b44-dddf-46cd-be47-d1d3d4c1961f",
 			"key": "token",
 			"value": "",
 			"type": "string"
 		},
 		{
-			"id": "4a907650-79e1-4d79-a377-6acec7d6f39f",
+			"id": "5a9e226e-d04f-4537-93c3-8f85c36d59ac",
 			"key": "adminToken",
 			"value": "",
 			"type": "string"

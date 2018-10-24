@@ -32,6 +32,8 @@ namespace BoardGamesApi
             services.AddVersioning();
 
             services.AddSwagger();
+
+            services.AddHealthChecks();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -55,6 +57,8 @@ namespace BoardGamesApi
             app.UseHttpsRedirection();
 
             app.UseSwagger();
+
+            app.UseHealthChecks("/live");
 
             app.UseMvc();
         }
