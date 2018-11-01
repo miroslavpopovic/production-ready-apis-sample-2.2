@@ -12,3 +12,4 @@ To follow up the presentation, switch through the various numbered git branches.
 
 - [Postman collection](board-games-api-postman-collection.json) for testing the API
 - [Sinergija 18 presentation](2018-sinergija-production-ready-apis-2.2.pptx)
+- [.NET Amsterdam meetup presentation](2018-production-ready-apis-2.2.pptx)
